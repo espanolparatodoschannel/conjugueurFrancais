@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr" class="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conjugueur Pro - 50 Verbes Essentiels</title>
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Configurar Tailwind para soportar dark mode mediante clase -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+
+<body
+    class="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/40 to-slate-100 dark:from-slate-900 dark:via-indigo-950/30 dark:to-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-500">
+
+    <!-- Header -->
+    <header
+        class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-white/20 dark:border-slate-700/50 sticky top-0 z-20 transition-colors duration-500">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
+            <div class="flex items-center space-x-2 self-start sm:self-auto">
+                <div class="bg-blue-600 p-2 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-white" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">Conjugueur Français</h1>
+            </div>
+
+            <div class="flex items-center gap-4 w-full sm:w-auto">
+                <div class="relative flex-1 sm:w-64">
+                    <input type="text" id="verbSearch" placeholder="Chercher un verbe..."
+                        class="w-full pl-10 pr-4 py-2 border dark:border-slate-600 rounded-full text-sm bg-white dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute left-3 top-3 text-slate-400"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+
+                <button id="themeToggle"
+                    class="p-2 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-yellow-400 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+                    aria-label="Toggle Dark Mode">
+                    <!-- Icono Sol (se muestra en dark mode) -->
+                    <svg id="sunIcon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                        </path>
+                    </svg>
+                    <!-- Icono Luna (se muestra en light mode) -->
+                    <svg id="moonIcon" class="block w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-6 md:py-8 grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
+
+        <!-- Sidebar: Controls -->
+        <aside class="md:col-span-1">
+            <div
+                class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/50 dark:border-slate-700/50 p-5 sticky top-24 space-y-6 transition-colors duration-500">
+                <!-- Verb Selector -->
+                <div>
+                    <label for="verbList" class="block text-sm font-bold text-indigo-500/80 dark:text-indigo-400/80 mb-2 uppercase tracking-wider">Verbo</label>
+                    <select id="verbList"
+                        class="w-full bg-slate-50/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-base md:text-sm rounded-xl focus:ring-indigo-500 focus:border-indigo-500 hover:border-indigo-300 p-3 shadow-sm transition-all cursor-pointer outline-none capitalize hover:bg-white dark:hover:bg-slate-800">
+                        <!-- Verbs will be injected here -->
+                    </select>
+                </div>
+
+                <div class="h-px bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-700 to-transparent"></div>
+
+                <!-- Tense Selector -->
+                <div>
+                    <label for="tenseSelector" class="block text-sm font-bold text-indigo-500/80 dark:text-indigo-400/80 mb-2 uppercase tracking-wider">Tiempo verbal</label>
+                    <select id="tenseSelector"
+                        class="w-full bg-slate-50/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-base md:text-sm rounded-xl focus:ring-indigo-500 focus:border-indigo-500 hover:border-indigo-300 p-3 shadow-sm transition-all cursor-pointer outline-none hover:bg-white dark:hover:bg-slate-800">
+                        <!-- Tenses injected here -->
+                    </select>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content: Conjugation -->
+        <section class="md:col-span-3 space-y-6">
+
+            <!-- Verb Info Card -->
+            <div id="verbHeader"
+                class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/50 dark:border-slate-700/50 text-center md:text-left flex flex-col md:flex-row md:justify-between items-center gap-4 transition-colors duration-500">
+                <div>
+                    <div class="flex items-center justify-center md:justify-start gap-4 mb-2">
+                        <h2 id="currentVerbTitle" class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-white capitalize tracking-tight">Être</h2>
+                        <button class="text-indigo-400/80 hover:text-indigo-600 dark:hover:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-900/30 hover:bg-indigo-100 dark:hover:bg-indigo-800/50 p-2.5 rounded-full transition-all flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 border border-indigo-100 dark:border-indigo-800/60" title="Écouter le verbe" onclick="speakVerbCardText(this, currentVerb)">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p id="verbGroup" class="text-indigo-600 dark:text-indigo-400 font-semibold text-lg tracking-wide bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-lg inline-block">Ser/Estar</p>
+                </div>
+            </div>
+
+            <!-- Conjugation Table -->
+            <div id="conjugationDisplay" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Conjugation items will be injected here -->
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="verbes.js"></script>
+    <script src="app.js"></script>
+
+    <!-- PWA Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(registration => {
+                    console.log('SW registrado exitosamente');
+                }).catch(err => {
+                    console.error('Fallo en el SW: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
