@@ -41,7 +41,7 @@ function renderVerbList(filter = "") {
     verbListEl.innerHTML = "";
     let matchedCount = 0;
     
-    verbsList.forEach(v => {
+    verbsList.sort((a, b) => a.localeCompare(b, 'fr')).forEach(v => {
         if (v.includes(filter.toLowerCase())) {
             matchedCount++;
             const option = document.createElement('option');
